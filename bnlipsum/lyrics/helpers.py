@@ -9,8 +9,8 @@ def get_albums(artist_url):
         artist_url,
         headers={
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) '
-                          'AppleWebKit/537.75.14 (KHTML, '
-                          'like Gecko) Version/7.0.3 Safari/7046A194A'
+                          'AppleWebKit/537.75.14 (KHTML, like Gecko) '
+                          'Version/7.0.3 Safari/7046A194A'
         }
     )
 
@@ -53,8 +53,8 @@ def get_lyrics(track_url):
         track_url,
         headers={
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) '
-                          'AppleWebKit/537.75.14 (KHTML, '
-                          'like Gecko) Version/7.0.3 Safari/7046A194A'
+                          'AppleWebKit/537.75.14 (KHTML, like Gecko) '
+                          'Version/7.0.3 Safari/7046A194A'
         }
     )
 
