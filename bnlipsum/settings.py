@@ -99,15 +99,7 @@ STATIC_URL = '/static/'
 
 # Redis
 REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
-REDIS_PROTOCOL, REDIS_HOST = tuple(urlparse(REDIS_URL))[:2]
 
-if ':' in REDIS_HOST:
-    REDIS_HOST, REDIS_PORT = REDIS_HOST.rsplit(':', 1)
-else:
-    REDIS_PORT = '6379'
-
-# Sessions
-SESSION_ENGINE = 'redis_sessions.session'
 
 # Caching
 def get_cache():
