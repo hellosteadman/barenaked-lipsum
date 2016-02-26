@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load staticfiles %}<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -6,37 +6,55 @@
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,800,300" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
         <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     </head>
-    <body style="font-family: Open Sans">
+    <body>
         <div class="jumbotron">
             <div class="container">
                 {% block jumbotron %}
-                    <h1>Barenaked Lipsum</h1>
+                    <h1>
+                        Barenaked Lipsum
+                        <small>BnL lyrics as Lorem Ipsum</small>
+                    </h1>
                 {% endblock %}
 
                 <form>
-                    <select name="w" onchange="form.submit();">
-                        <option value="10"{% if request.GET.w == '10' %} selected{% endif %}>10</option>
-                        <option value="20"{% if request.GET.w == '20' %} selected{% endif %}>20</option>
-                        <option value="50"{% if not request.GET.w or request.GET.w == '50' %} selected{% endif %}>50</option>
-                        <option value="100"{% if request.GET.w == '100' %} selected{% endif %}>100</option>
+                    <select name="w" class="selectpicker" onchange="form.submit();">
+                        <option value="10"{% if request.GET.w == '10' %} selected{% endif %}>10 words per paragraph</option>
+                        <option value="20"{% if request.GET.w == '20' %} selected{% endif %}>20 words per paragraph</option>
+                        <option value="50"{% if not request.GET.w or request.GET.w == '50' %} selected{% endif %}>50 words per paragraph</option>
+                        <option value="100"{% if request.GET.w == '100' %} selected{% endif %}>100 words per paragraph</option>
                     </select>
 
-                    <select name="p" onchange="form.submit();">
-                        <option value="1"{% if request.GET.p == '1' %} selected{% endif %}>1</option>
-                        <option value="5"{% if request.GET.p == '5' %} selected{% endif %}>5</option>
-                        <option value="10"{% if not request.GET.p or request.GET.p == '10' %} selected{% endif %}>10</option>
+                    <select name="p" class="selectpicker" onchange="form.submit();">
+                        <option value="1"{% if request.GET.p == '1' %} selected{% endif %}>1 paragraph</option>
+                        <option value="5"{% if request.GET.p == '5' %} selected{% endif %}>5 paragraphs</option>
+                        <option value="10"{% if not request.GET.p or request.GET.p == '10' %} selected{% endif %}>10 paragraphs</option>
                     </select>
 
-                    <input type="checkbox" name="nc" onchange="form.submit();" value="1"{% if request.GET.nc %} checked{% endif %}>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default{% if request.GET.nc %} active{% endif %}">
+                            <input type="checkbox" name="nc" onchange="form.submit();" value="1"{% if request.GET.nc %} checked{% endif %}>
+                            Exclude chorus lines
+                        </label>
+                    </div>
                 </form>
             </div>
         </div>
 
-        <div class="container">
+        <main class="container">
             {% block content %}{% endblock %}
-        </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                Made by <a href="http://steadman.io/" target="_blank">Steadman</a>,
+                a developer who was once part of a Barenaked Ladies web ring.
+            </div>
+        </footer>
     </body>
 </html>

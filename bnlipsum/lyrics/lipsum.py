@@ -29,7 +29,7 @@ def generate(words=50, paragraphs=10, ignore_chorus=False):
                 para += ' '
 
             stanza = stanzas.pop(0)
-            if stanza.startswith('<'):
+            if '<' in stanza:
                 continue
 
             para += stanza.replace('\n', ' ').strip()
