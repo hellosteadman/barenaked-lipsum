@@ -85,27 +85,15 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-# Internationalization
+# Internationalisation
 LANGUAGE_CODE = 'en-gb'
 TIME_ZONE = 'Europe/London'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Cloud storage
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET')
-AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN')
-AWS_PRELOAD_METADATA = True
-S3DIRECT_REGION = 'eu-west-1'
-
-if not DEBUG:
-    DEFAULT_FILE_STORAGE = 'screen.s3.MediaRootS3BotoStorage'
-    STATICFILES_STORAGE = 'screen.s3.StaticRootS3BotoStorage'
-
-MEDIA_URL = DEBUG and '/media/' or '//%s/media/' % AWS_S3_CUSTOM_DOMAIN
-STATIC_URL = DEBUG and '/static/' or '//%s/static/' % AWS_S3_CUSTOM_DOMAIN
+# Static files
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Redis
 REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
