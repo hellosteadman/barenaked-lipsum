@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('--words', type=int, default=50)
-        parser.add_argument('--paragraphs', type=int, default=1)
+        parser.add_argument('--paragraphs', type=int, default=10)
         parser.add_argument(
             '--ignore-chorus', dest='ignore_chorus',
             type=bool, default=False
