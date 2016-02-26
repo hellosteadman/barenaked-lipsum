@@ -20,16 +20,19 @@ def get_albums(artist_url):
         text = album.text_content()
         match = re.search(r'(?:album|compilation): "(.+)" \((\d+)\)', text)
 
-        if match is not None:
-            album_title, album_year = match.groups()
-        elif text.strip() == 'other songs:':
+        if match is None:
             continue
 
+        album_title, album_year = match.groups()
         tracks = []
+
         for sibling in album.itersiblings():
             if sibling.tag == 'a':
                 track_url = sibling.get('href')
                 track_title = sibling.text_content()
+
+                if not track_title or not track_url:
+                    continue
 
                 tracks.append(
                     (
@@ -65,14 +68,17 @@ def get_lyrics(track_url):
         chorus = False
 
         for line in lines:
-            if line.startswith('<!--') or line == '&#13;':
+            if line.startswith('<!--') or line.strip() == '&#13;':
                 continue
 
-            if line == '<i>[Chorus]</i>':
+            if line.strip() == '<i>[Chorus]</i>':
                 continue
 
-            if line == '<i>[Chorus:]</i>':
+            if line.strip() == '<i>[Chorus:]</i>':
                 chorus = True
+                continue
+
+            if line.strip().startswith('<'):
                 continue
 
             if not line.strip():

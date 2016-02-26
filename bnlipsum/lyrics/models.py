@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 
 
 class Album(models.Model):
@@ -34,7 +34,7 @@ class Stanza(models.Model):
     chorus = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.chorus and _('Chorus') or (_('Verse %d') % self.number)
+        return self.chorus and _(u'Chorus') or (_(u'Verse %d') % self.number)
 
     class Meta:
         ordering = ('number', 'track')
